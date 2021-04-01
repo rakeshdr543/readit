@@ -3,6 +3,7 @@ import Link from "next/link"
 import InputGroup from "../components/InputGroup";
 import {FormEvent, useState} from "react";
 import {useRouter} from "next/router";
+import axios from "axios";
 
 export default function Register(){
     const [email,setEmail] = useState('')
@@ -22,9 +23,14 @@ export default function Register(){
         }
         
         try {
-
-        }catch (e) {
-            
+            await axios.post('/auth/register',{
+                email,
+                password,
+                username
+            })
+            router.push('/login')
+        }catch (err) {
+            setErrors(err.response.data)
         }
     }
 

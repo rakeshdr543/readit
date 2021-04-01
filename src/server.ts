@@ -4,6 +4,7 @@ import express from 'express';
 import morgan from "morgan";
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 
 dotenv.config()
 
@@ -13,12 +14,18 @@ import subRoutes from './routes/subs'
 
 import trim from "./middleware/trim";
 
+const Port = process.env.port
 const app = express()
 
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(trim)
 app.use(cookieParser())
+app.use(cors({
+    credentials:true,
+    origin:process.env.ORIGIN,
+    optionsSuccessStatus: 200,
+}))
 
 app.get('/',(_,res)=>{
     res.send('Hello my reddit')
@@ -29,7 +36,7 @@ app.use('/api/posts',postRoutes)
 app.use('/api/subs',subRoutes)
 
 
-app.listen(5001,async ()=>{
+app.listen(Port,async ()=>{
     console.log("Server connected in 5000")
     try {
         await createConnection()

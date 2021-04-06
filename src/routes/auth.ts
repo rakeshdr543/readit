@@ -56,12 +56,12 @@ const login = async (req:Request,res:Response)=>{
 
       const user = await User.findOne({username})
 
-      if(!user) return res.status(404).json({error:'User not found'})
+      if(!user) return res.status(404).json({username:'User not found'})
 
       const passwordMatches = await bcrypt.compare(password,user.password)
 
       if(!passwordMatches){
-         return res.status(401).json({error:"Password is incorrect"})
+         return res.status(401).json({password:"Password is incorrect"})
       }
 
       const token = jwt.sign({username},process.env.JWT_SECRET!)
@@ -80,7 +80,7 @@ const login = async (req:Request,res:Response)=>{
       return res.json(user)
    }catch (err) {
       console.log(err)
-      return res.status(500).json(err)
+       return res.json({ error: 'Something went wrong' })
    }
 }
 

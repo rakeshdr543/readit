@@ -3,27 +3,25 @@ import Sub from "../entities/Sub";
 import Post from "../entities/Post";
 import auth from "./auth";
 import Comment from "../entities/Comment";
+import user from '../middleware/user'
 
-const createPost = async (req:Request,res:Response)=>{
-    const {title,body,sub} = req.body;
+const createPost = async (req: Request, res: Response) => {
+    const { title, body, sub } = req.body
 
-    const user = res.locals.user
-
-    if(title.trim()===''){
-        return res.status(400).json("title:Title must not be empty")
+    if (title.trim() === '') {
+        return res.status(400).json({ title: 'Title must not be empty' })
     }
+console.log('hey',res)
+    try {
+        // find sub
+        const subRecord = await Sub.findOneOrFail({ name: sub })
 
-    try{
-
-        const subRecord = await Sub.findOneOrFail({name:sub})
-
-        const post = new Post({title,body,user,sub:subRecord})
-
+        const post = new Post({ title, body, user:res.locals.user, sub: subRecord })
         await post.save()
         return res.json(post)
-    }catch (err) {
+    } catch (err) {
         console.log(err)
-        return res.status(500).json(err)
+        return res.status(500).json({ error: 'Something went wrong' })
     }
 }
 
@@ -76,9 +74,9 @@ const commentOnPost = async (req: Request, res: Response) => {
 
 const router= Router()
 
-router.post('/',auth,createPost)
+router.post('/',user,auth,createPost)
 router.get('/',getPosts)
 router.get('/:identifier/:slug',getPost)
-router.post('/:identifier/:slug/comments',auth,commentOnPost)
+router.post('/:identifier/:slug/comments',user,auth,commentOnPost)
 
 export default router

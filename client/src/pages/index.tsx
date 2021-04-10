@@ -91,3 +91,13 @@ export default function Home() {
         </div>
     )
 }
+
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   try {
+//     const res = await Axios.get('/posts')
+
+//     return { props: { posts: res.data } }
+//   } catch (err) {
+//     return { props: { error: 'Something went wrong' } }
+//   }
+// }

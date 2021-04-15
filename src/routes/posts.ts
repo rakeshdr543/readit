@@ -28,7 +28,7 @@ console.log('hey',res)
 const getPosts = async (_:Request,res:Response)=>{
 
     try {
-        const posts = await Post.find({order:{createAt:'DESC'},relations: ['comments', 'votes', 'sub'],})
+        const posts = await Post.find({order:{createdAt:'DESC'},relations: ['comments', 'votes', 'sub'],})
 
         if (res.locals.user) {
             posts.forEach((p) => p.setUserVote(res.locals.user))

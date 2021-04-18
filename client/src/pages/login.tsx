@@ -27,7 +27,7 @@ export default function Register() {
                 password,
             })
             dispatch('LOGIN', res.data)
-            router.push('/')
+            router.back()
         } catch (err) {
             setErrors(err.response.data)
         }

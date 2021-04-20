@@ -16,7 +16,23 @@ export default function Submit(){
     const {data:sub,error}=useSWR<Sub>(subName?`/subs/${subName}`:null)
     if(error) router.push('/')
 
-    const submitPost =()=>{}
+    const submitPost = async (event: FormEvent) => {
+        event.preventDefault()
+
+        if (title.trim() === '') return
+
+        try {
+            const { data: post } = await Axios.post<Post>('/posts', {
+                title: title.trim(),
+                body,
+                sub: sub.name,
+            })
+
+            router.push(`/r/${sub.name}/${post.identifier}/${post.slug}`)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     return(
         <div className="container flex pt-5">

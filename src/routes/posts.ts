@@ -13,6 +13,7 @@ const createPost = async (req: Request, res: Response) => {
     if (title.trim() === '') {
         return res.status(400).json({ title: 'Title must not be empty' })
     }
+
 console.log('hey',res)
     try {
         // find sub

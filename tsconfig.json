@@ -26,10 +26,12 @@
 
       //Extra
       "alwaysStrict": true,
-      "noUnusedLocals": true,
+//      "noUnusedLocals": true,
       "noUnusedParameters": true,
       "noImplicitReturns": true,
       "noFallthroughCasesInSwitch": true,
       "resolveJsonModule": true
-   }
+   },
+   "include": ["src/**/*"],
+   "exclude": ["node_modules", "client"]
 }

@@ -6,7 +6,6 @@ import useSWR from 'swr'
 import Sidebar from '../../../components/SideBar'
 import { Post, Sub } from '../../../types'
 import {GetServerSideProps} from "next";
-import {async} from "q";
 
 export default function Submit(){
     const [title,setTitle] = useState('')

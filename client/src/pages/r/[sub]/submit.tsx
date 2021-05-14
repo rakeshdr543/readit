@@ -88,7 +88,7 @@ export default function Submit(){
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     try {
         const cookie = req.headers.cookie
-        if (!cookie) throw new Error('Missing auth token cookie')
+        if (!cookie) throw new Error('Missing authentication token cookie')
 
         await Axios.get('/auth/me', { headers: { cookie } })
 

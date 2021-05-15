@@ -57,6 +57,7 @@ export default function Submit(){
                                 className="absolute mb-2 text-sm text-gray-500 select-none focus:border-gray-600"
                                 style={{ top: 11, right: 10 }}
                             >
+
                                 {/* e.g. 15/300 */}
                                 {title.trim().length}/300
                             </div>

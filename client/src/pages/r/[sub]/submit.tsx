@@ -5,7 +5,7 @@ import { FormEvent, useState } from 'react'
 import useSWR from 'swr'
 import Sidebar from '../../../components/SideBar'
 import { Post, Sub } from '../../../types'
-import {GetServerSideProps} from "next";
+import {GetServerSideProps} from "next"
 
 export default function Submit(){
     const [title,setTitle] = useState('')
